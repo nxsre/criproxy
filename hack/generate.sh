@@ -14,10 +14,10 @@ cd "$(dirname "$(readlinkf "${BASH_SOURCE}")")"/..
 # FIXME: without --skip-unsafe, it may generate direct translations
 # for FilesystemUsage in some cases
 conversion-gen --logtostderr \
-               -i github.com/Mirantis/criproxy/pkg/runtimeapis/v1_9 \
-               --base-peer-dirs github.com/Mirantis/criproxy/pkg/runtimeapis/v1_9 \
+               -i github.com/nxsre/criproxy/pkg/runtimeapis/v1_9 \
+               --base-peer-dirs github.com/nxsre/criproxy/pkg/runtimeapis/v1_9 \
                -h hack/boilerplate.go.txt \
                --skip-unsafe \
-               github.com/Mirantis/criproxy/pkg/runtimeapis/v1_9
+               github.com/nxsre/criproxy/pkg/runtimeapis/v1_9
 
 sed -i 's/^package v1_9/package runtime/' pkg/runtimeapis/v1_9/conversion_generated.go

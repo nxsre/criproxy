@@ -26,8 +26,8 @@ import (
 
 	"github.com/golang/glog"
 
-	"github.com/Mirantis/criproxy/pkg/proxy"
-	"github.com/Mirantis/criproxy/pkg/utils"
+	"github.com/nxsre/criproxy/pkg/proxy"
+	"github.com/nxsre/criproxy/pkg/utils"
 )
 
 const (
@@ -38,12 +38,12 @@ const (
 var (
 	listen = flag.String("listen", "/run/criproxy.sock",
 		"The unix socket to listen on, e.g. /run/virtlet.sock")
-	connect = flag.String("connect", "/var/run/dockershim.sock",
-		"CRI runtime ids and unix socket(s) to connect to, e.g. /var/run/dockershim.sock,alt:/var/run/another.sock")
+	connect = flag.String("connect", "/run/containerd/containerd.sock",
+		"CRI runtime ids and unix socket(s) to connect to, e.g. /run/containerd/containerd.sock,alt:/var/run/another.sock")
 	streamPort    = flag.Int("streamPort", 11250, "streaming port of the default runtime")
 	streamUrl     = flag.String("streamUrl", "", "streaming url of the default runtime (-streamPort is ignored if this value is set)")
 	apiServerHost = flag.String("apiserver", "", "apiserver URL")
-	criVersions   = []proxy.CRIVersion{&proxy.CRI19{}, &proxy.CRI112{}}
+	criVersions   = []proxy.CRIVersion{&proxy.CRI19{}, &proxy.CRI115{}}
 )
 
 // runCriProxy starts CRI proxy

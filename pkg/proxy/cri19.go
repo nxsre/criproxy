@@ -19,7 +19,7 @@ package proxy
 import (
 	"google.golang.org/grpc"
 
-	runtimeapi "github.com/Mirantis/criproxy/pkg/runtimeapis/v1_9"
+	runtimeapi "github.com/nxsre/criproxy/pkg/runtimeapis/v1_9"
 )
 
 // ---
@@ -1386,5 +1386,5 @@ func (c *CRI19) WrapObject(o interface{}) (CRIObject, CRIObject, error) {
 func (c *CRI19) ProtoPackage() string { return "runtime" }
 
 func (c *CRI19) UpgradesTo() CRIVersion {
-	return &CRI112{}
+	return &CRI115{}
 }

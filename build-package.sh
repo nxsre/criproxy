@@ -5,7 +5,7 @@ set -o pipefail
 set -o errtrace
 
 if [[ ! -d vendor ]]; then
-  glide install --strip-vendor 1>&2
+  go mod vendor
 fi
 
 go build 1>&2
@@ -19,7 +19,7 @@ author="Ivan Shvedunov <ishvedunov@mirantis.com>"
 cat >debian/changelog <<EOF
 criproxy (${version}) stable; urgency=optional
 
-  * https://github.com/Mirantis/criproxy
+  * https://github.com/nxsre/criproxy
 
  -- ${author}  ${date}
 

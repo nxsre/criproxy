@@ -24,14 +24,14 @@ import (
 	"sync"
 	"time"
 
-	runtimeapis "github.com/Mirantis/criproxy/pkg/runtimeapis"
-	digest  "github.com/opencontainers/go-digest"
 	"github.com/golang/glog"
+	runtimeapis "github.com/nxsre/criproxy/pkg/runtimeapis"
+	digest "github.com/opencontainers/go-digest"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 
-	"github.com/Mirantis/criproxy/pkg/utils"
+	"github.com/nxsre/criproxy/pkg/utils"
 )
 
 type clientState int

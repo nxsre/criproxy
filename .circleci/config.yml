@@ -32,13 +32,13 @@ jobs:
     - run:
         name: Place the source
         command: |
-          rm -rf /go/src/github.com/Mirantis/criproxy
-          cp -av . /go/src/github.com/Mirantis/criproxy
-          cd /go/src/github.com/Mirantis/criproxy
+          rm -rf /go/src/github.com/nxsre/criproxy
+          cp -av . /go/src/github.com/nxsre/criproxy
+          cd /go/src/github.com/nxsre/criproxy
     - run:
         name: Build package
         command: |
-          cd /go/src/github.com/Mirantis/criproxy
+          cd /go/src/github.com/nxsre/criproxy
           ./build-package.sh
           mkdir -p _output/
           mv ../criproxy*.deb _output/
@@ -46,15 +46,15 @@ jobs:
     - run:
         name: Run tests
         command: |
-          cd /go/src/github.com/Mirantis/criproxy
+          cd /go/src/github.com/nxsre/criproxy
           go test -race -v ./pkg/...
     - persist_to_workspace:
-        root: /go/src/github.com/Mirantis/criproxy/_output
+        root: /go/src/github.com/nxsre/criproxy/_output
         paths:
         - criproxy*.deb
         - criproxy
     - store_artifacts:
-        path: /go/src/github.com/Mirantis/criproxy/_output
+        path: /go/src/github.com/nxsre/criproxy/_output
         destination: criproxy
 
   publish:

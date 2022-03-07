@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"reflect"
 
-	v1_9 "github.com/Mirantis/criproxy/pkg/runtimeapis/v1_9"
 	"github.com/gogo/protobuf/proto"
+	v19 "github.com/nxsre/criproxy/pkg/runtimeapis/v1_9"
 )
 
 func convertTo(in interface{}, targetProtoPackage string) (interface{}, error) {
@@ -34,7 +34,7 @@ func convertTo(in interface{}, targetProtoPackage string) (interface{}, error) {
 		return in, nil
 	}
 	out := reflect.New(mtype.Elem()).Interface()
-	return out, v1_9.Scheme.Convert(in, out, nil)
+	return out, v19.Scheme.Convert(in, out, nil)
 }
 
 // Upgrade converts CRI 1.9 object to CRI 1.12 one. It just returns

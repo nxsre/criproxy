@@ -1,14 +1,15 @@
-FROM golang:1.10
+FROM golang:1.17
 
+ENV https_proxy=http://10.0.0.1:1087
 RUN go get github.com/tcnksm/ghr && \
-    go get github.com/Masterminds/glide && \
     mkdir -p /go/src/k8s.io && \
     git clone https://github.com/kubernetes/code-generator /go/src/k8s.io/code-generator && \
     cd /go/src/k8s.io/code-generator && \
     git checkout 1eeed5f600b70f788fa97951e1e7b47ce212c242 && \
+    go mod init && go mod vendor && \
     go build -o /go/bin/conversion-gen ./cmd/conversion-gen
 
-FROM golang:1.10
+FROM golang:1.17
 
 ENV DOCKER_VERSION "17.03.0-ce"
 
@@ -18,7 +19,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y && \
     apt-get -yy -q install --no-install-recommends --no-install-suggests --fix-missing \
-      dpkg-dev build-essential debhelper dh-systemd socat \
+      dpkg-dev build-essential debhelper socat \
       ca-certificates curl && \
     apt-get upgrade -y && \
     apt-get autoremove -y && \
@@ -31,7 +32,7 @@ RUN curl -sSL -o "/tmp/docker-${DOCKER_VERSION}.tgz" "https://get.docker.com/bui
 
 COPY --from=0 /go/bin/* /go/bin/
 
-ADD . /go/src/github.com/Mirantis/criproxy
-WORKDIR /go/src/github.com/Mirantis/criproxy
+ADD . /go/src/github.com/nxsre/criproxy
+WORKDIR /go/src/github.com/nxsre/criproxy
 
 CMD ["./build-package.sh"]

@@ -4,7 +4,7 @@ set -o nounset
 set -o pipefail
 set -o errtrace
 
-TARGET_PKGS=(v1_9 v1_12)
+TARGET_PKGS=(v1_9 v1_15)
 K8S_TAGS=(v1.9.11 v1.12.3)
 SUBDIRS=(pkg/kubelet/apis/cri/v1alpha1/runtime pkg/kubelet/apis/cri/runtime/v1alpha2)
 FILES=(api.pb.go api.proto constants.go)
@@ -36,4 +36,4 @@ go fmt pkg/runtimeapis/v1_9/api.pb.go
 
 tar --exclude='vendor' --exclude='.git' -c . |
     docker run --rm -i ishvedunov/criproxy-build:0.0.6 \
-           /bin/bash -c 'cd /go/src/github.com/Mirantis/criproxy && tar -x && hack/generate.sh && tar -c $(find . -name "*_generated.go")' | tar -xv
+           /bin/bash -c 'cd /go/src/github.com/nxsre/criproxy && tar -x && hack/generate.sh && tar -c $(find . -name "*_generated.go")' | tar -xv

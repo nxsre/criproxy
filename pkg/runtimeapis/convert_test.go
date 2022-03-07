@@ -23,8 +23,8 @@ import (
 
 	"github.com/ghodss/yaml"
 
-	v1_12 "github.com/Mirantis/criproxy/pkg/runtimeapis/v1_12"
-	v1_9 "github.com/Mirantis/criproxy/pkg/runtimeapis/v1_9"
+	v1_15 "github.com/nxsre/criproxy/pkg/runtimeapis/v1_15"
+	v1_9 "github.com/nxsre/criproxy/pkg/runtimeapis/v1_9"
 )
 
 const (
@@ -60,9 +60,9 @@ func podSandboxConfig9(nsOption *v1_9.NamespaceOption) *v1_9.PodSandboxConfig {
 	return r
 }
 
-func podSandboxConfig10(nsOption *v1_12.NamespaceOption) *v1_12.PodSandboxConfig {
-	r := &v1_12.PodSandboxConfig{
-		Metadata: &v1_12.PodSandboxMetadata{
+func podSandboxConfig10(nsOption *v1_15.NamespaceOption) *v1_15.PodSandboxConfig {
+	r := &v1_15.PodSandboxConfig{
+		Metadata: &v1_15.PodSandboxMetadata{
 			Name:      "pod-1-1",
 			Uid:       podUid1,
 			Namespace: "default",
@@ -71,8 +71,8 @@ func podSandboxConfig10(nsOption *v1_12.NamespaceOption) *v1_12.PodSandboxConfig
 		Labels: map[string]string{"name": "pod-1-1"},
 	}
 	if nsOption != nil {
-		r.Linux = &v1_12.LinuxPodSandboxConfig{
-			SecurityContext: &v1_12.LinuxSandboxSecurityContext{
+		r.Linux = &v1_15.LinuxPodSandboxConfig{
+			SecurityContext: &v1_15.LinuxSandboxSecurityContext{
 				NamespaceOptions: nsOption,
 			},
 		}
@@ -91,7 +91,7 @@ func TestConversion(t *testing.T) {
 			in: &v1_9.RunPodSandboxRequest{
 				Config: podSandboxConfig9(nil),
 			},
-			out: &v1_12.RunPodSandboxRequest{
+			out: &v1_15.RunPodSandboxRequest{
 				Config: podSandboxConfig10(nil),
 			},
 		},
@@ -100,9 +100,9 @@ func TestConversion(t *testing.T) {
 			in: &v1_9.RunPodSandboxRequest{
 				Config: podSandboxConfig9(&v1_9.NamespaceOption{HostNetwork: true}),
 			},
-			out: &v1_12.RunPodSandboxRequest{
-				Config: podSandboxConfig10(&v1_12.NamespaceOption{
-					Network: v1_12.NamespaceMode_NODE,
+			out: &v1_15.RunPodSandboxRequest{
+				Config: podSandboxConfig10(&v1_15.NamespaceOption{
+					Network: v1_15.NamespaceMode_NODE,
 				}),
 			},
 		},
@@ -111,9 +111,9 @@ func TestConversion(t *testing.T) {
 			in: &v1_9.RunPodSandboxRequest{
 				Config: podSandboxConfig9(&v1_9.NamespaceOption{HostPid: true}),
 			},
-			out: &v1_12.RunPodSandboxRequest{
-				Config: podSandboxConfig10(&v1_12.NamespaceOption{
-					Pid: v1_12.NamespaceMode_NODE,
+			out: &v1_15.RunPodSandboxRequest{
+				Config: podSandboxConfig10(&v1_15.NamespaceOption{
+					Pid: v1_15.NamespaceMode_NODE,
 				}),
 			},
 		},
@@ -122,9 +122,9 @@ func TestConversion(t *testing.T) {
 			in: &v1_9.RunPodSandboxRequest{
 				Config: podSandboxConfig9(&v1_9.NamespaceOption{HostIpc: true}),
 			},
-			out: &v1_12.RunPodSandboxRequest{
-				Config: podSandboxConfig10(&v1_12.NamespaceOption{
-					Ipc: v1_12.NamespaceMode_NODE,
+			out: &v1_15.RunPodSandboxRequest{
+				Config: podSandboxConfig10(&v1_15.NamespaceOption{
+					Ipc: v1_15.NamespaceMode_NODE,
 				}),
 			},
 		},
@@ -142,14 +142,14 @@ func TestConversion(t *testing.T) {
 					},
 				},
 			},
-			out: &v1_12.CreateContainerRequest{
+			out: &v1_15.CreateContainerRequest{
 				PodSandboxId: podSandboxId1,
-				Config: &v1_12.ContainerConfig{
-					Metadata: &v1_12.ContainerMetadata{
+				Config: &v1_15.ContainerConfig{
+					Metadata: &v1_15.ContainerMetadata{
 						Name:    "container1",
 						Attempt: 0,
 					},
-					Image: &v1_12.ImageSpec{
+					Image: &v1_15.ImageSpec{
 						Image: "image1-1",
 					},
 				},

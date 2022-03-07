@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// +k8s:conversion-gen=github.com/Mirantis/criproxy/pkg/runtimeapis/v1_9
-
+// +k8s:conversion-gen=github.com/nxsre/criproxy/pkg/runtimeapis/v1_9
+// https://github.com/kubernetes/kubernetes/tree/v1.15.12/staging/src/k8s.io/cri-api/pkg/apis/runtime/v1alpha2
 package v1alpha2
 
 import (

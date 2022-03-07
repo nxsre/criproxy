@@ -15,7 +15,7 @@ system and then reconfigure existing kubelet setup to make it use CRI Proxy.
 ### Installation on kubeadm clusters for use with Virtlet
 
 For kubeadm-deployed Kubernetes node running Ubuntu 16.04, you can go to
-[Releases](https://github.com/Mirantis/criproxy/releases) page of the
+[Releases](https://github.com/nxsre/criproxy/releases) page of the
 project, download latest `criproxy_X.Y.Z_amd64.deb` to the node
 and install it with dpkg:
 ```bash
@@ -35,7 +35,7 @@ but later they can be made more universal.
 
 In order to install the CRI Proxy manually, first you need to download
 `criproxy` binary from
-[Releases](https://github.com/Mirantis/criproxy/releases) page of the
+[Releases](https://github.com/nxsre/criproxy/releases) page of the
 project and place it under `/usr/local/bin`.
 
 Create a file named `/etc/systemd/system/criproxy.service` with
